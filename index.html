@@ -34,7 +34,7 @@
 </section>
 
 <!-- 🔐 ADMIN LOGIN (hidden) -->
-<button onclick="alert('JS is working')">Admin</button>
+<button id="adminBtn" onclick="openAdmin()">Admin</button>
 
 <div id="adminLogin" class="hidden">
   <input id="adminPass" type="password" placeholder="Admin password">
@@ -43,9 +43,34 @@
 
 <div id="adminPanel" class="hidden">
   <h2>Admin Panel</h2>
-  <p>Welcome, Admin 🎹</p>
+  <p>Welcome, Admin 🎹</p<div id="adminLogin" class="adminBox">
+  <input id="adminPass" type="password" placeholder="Admin password">
+  <button onclick="adminLogin()">Enter</button>
 </div>
 
-<script src="script.js"></script>
+<div id="adminPanel" class="adminBox hidden">
+  <h2>🎹 Admin Panel</h2>
+  <p>Welcome, Maestro</p>
+</div>
+
+<script src="script.js"><script>
+const ADMIN_PASSWORD = "pianoAdmin123";
+
+function openAdmin() {
+  const box = document.getElementById("adminLogin");
+  box.classList.toggle("hidden");
+}
+
+function adminLogin() {
+  const pass = document.getElementById("adminPass").value;
+  if (pass === ADMIN_PASSWORD) {
+    document.getElementById("adminLogin").classList.add("hidden");
+    document.getElementById("adminPanel").classList.remove("hidden");
+  } else {
+    alert("Wrong password");
+  }
+}
+</script>
+</script>
 </body>
 </html>
