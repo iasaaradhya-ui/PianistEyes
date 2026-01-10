@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Aaradhya | Piano</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Aaradhya | Piano</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -16,7 +16,8 @@
 <section>
   <h2>🎥 Video Gallery</h2>
   <div class="videos">
-    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
+    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/9bZkp7q19f0" allowfullscreen></iframe>
   </div>
 </section>
 
@@ -25,52 +26,29 @@
   <div class="gallery">
     <img src="https://picsum.photos/300/200?1">
     <img src="https://picsum.photos/300/200?2">
+    <img src="https://picsum.photos/300/200?3">
   </div>
 </section>
 
 <section>
   <h2>🎵 Piano Recordings</h2>
   <audio controls src="song1.mp3"></audio>
+  <audio controls src="song2.mp3"></audio>
 </section>
 
-<!-- 🔐 ADMIN LOGIN (hidden) -->
+<!-- 🔐 ADMIN -->
 <button id="adminBtn" onclick="openAdmin()">Admin</button>
 
-<div id="adminLogin" class="hidden">
-  <input id="adminPass" type="password" placeholder="Admin password">
-  <button onclick="adminLogin()">Enter</button>
-</div>
-
-<div id="adminPanel" class="hidden">
-  <h2>Admin Panel</h2>
-  <p>Welcome, Admin 🎹</p<div id="adminLogin" class="adminBox">
+<div id="adminLogin" class="adminBox hidden">
   <input id="adminPass" type="password" placeholder="Admin password">
   <button onclick="adminLogin()">Enter</button>
 </div>
 
 <div id="adminPanel" class="adminBox hidden">
-  <h2>🎹 Admin Panel</h2>
-  <p>Welcome, Maestro</p>
+  <h2>Admin Panel 🎹</h2>
+  <p>You are logged in.</p>
 </div>
 
-<script src="script.js"><script>
-const ADMIN_PASSWORD = "pianoAdmin123";
-
-function openAdmin() {
-  const box = document.getElementById("adminLogin");
-  box.classList.toggle("hidden");
-}
-
-function adminLogin() {
-  const pass = document.getElementById("adminPass").value;
-  if (pass === ADMIN_PASSWORD) {
-    document.getElementById("adminLogin").classList.add("hidden");
-    document.getElementById("adminPanel").classList.remove("hidden");
-  } else {
-    alert("Wrong password");
-  }
-}
-</script>
-</script>
+<script src="script.js"></script>
 </body>
 </html>
