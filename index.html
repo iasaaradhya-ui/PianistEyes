@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Aaradhya | Piano</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Aaradhya 🎹</h1>
+  <p id="visitorCount"></p>
+</header>
+
+<section>
+  <h2>🎥 Video Gallery</h2>
+  <div class="videos">
+    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
+  </div>
+</section>
+
+<section>
+  <h2>📸 Image Gallery</h2>
+  <div class="gallery">
+    <img src="https://picsum.photos/300/200?1">
+    <img src="https://picsum.photos/300/200?2">
+  </div>
+</section>
+
+<section>
+  <h2>🎵 Piano Recordings</h2>
+  <audio controls src="song1.mp3"></audio>
+</section>
+
+<!-- 🔐 ADMIN LOGIN (hidden) -->
+<button id="adminBtn" onclick="openAdmin()">Admin</button>
+
+<div id="adminLogin" class="hidden">
+  <input id="adminPass" type="password" placeholder="Admin password">
+  <button onclick="adminLogin()">Enter</button>
+</div>
+
+<div id="adminPanel" class="hidden">
+  <h2>Admin Panel</h2>
+  <p>Welcome, Admin 🎹</p>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
