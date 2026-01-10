@@ -37,14 +37,15 @@
   </section>
 </section>
 
-<script type="module" src="app.js">
+<script type="module">
+
 // Firebase v9+ imports
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics.js";
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 import { getFirestore, doc, getDoc, setDoc, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
-// 🔥 Firebase config - replace with YOUR project keys
+// 🔥 Firebase config (yours)
 const firebaseConfig = {
   apiKey: "AIzaSyC4k4EhNS9jbJs7TjKU705uZ0oOtcXGabk",
   authDomain: "piano-cea95.firebaseapp.com",
@@ -62,78 +63,54 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 // 🔐 Email login
-async function login() {
-  const emailInput = document.getElementById("email").value;
-  const passwordInput = document.getElementById("password").value;
+window.login = async function () {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
   try {
-    await signInWithEmailAndPassword(auth, emailInput, passwordInput);
+    await signInWithEmailAndPassword(auth, email, password);
     document.getElementById("login").style.display = "none";
     document.getElementById("content").style.display = "block";
-  } catch(err) { alert(err.message); }
-}
+  } catch (e) {
+    alert(e.message);
+  }
+};
 
 // 🌐 Google login
-async function googleLogin() {
+window.googleLogin = async function () {
   const provider = new GoogleAuthProvider();
   try {
     await signInWithPopup(auth, provider);
     document.getElementById("login").style.display = "none";
     document.getElementById("content").style.display = "block";
-  } catch(err) { alert(err.message); }
-}
+  } catch (e) {
+    alert(e.message);
+  }
+};
 
 // 📊 Visitor counter
 async function updateVisitorCount() {
-  const counterRef = doc(db, "stats", "visits");
-  const docSnap = await getDoc(counterRef);
-  let count = docSnap.exists() ? docSnap.data().count + 1 : 1;
-  await setDoc(counterRef, { count });
+  const ref = doc(db, "stats", "visits");
+  const snap = await getDoc(ref);
+  let count = snap.exists() ? snap.data().count + 1 : 1;
+  await setDoc(ref, { count });
   document.getElementById("visitorCount").innerText = "Visitors: " + count;
 }
 
 // 🎥 Video gallery
 function loadVideos() {
-  const videosDiv = document.getElementById("videos");
-  const videosCol = collection(db, "videos");
-  onSnapshot(videosCol, snapshot => {
-    videosDiv.innerHTML = "";
-    snapshot.forEach(doc => {
-      videosDiv.innerHTML += `<iframe src="https://www.youtube.com/embed/${doc.data().id}" allowfullscreen></iframe>`;
+  const container = document.getElementById("videos");
+  onSnapshot(collection(db, "videos"), snap => {
+    container.innerHTML = "";
+    snap.forEach(d => {
+      container.innerHTML += `<iframe src="https://www.youtube.com/embed/${d.data().id}" allowfullscreen></iframe>`;
     });
   });
 }
 
-// 📸 Image gallery
-function loadImages() {
-  const galleryDiv = document.getElementById("gallery");
-  const imagesCol = collection(db, "images");
-  onSnapshot(imagesCol, snapshot => {
-    galleryDiv.innerHTML = "";
-    snapshot.forEach(doc => {
-      galleryDiv.innerHTML += `<img src="${doc.data().url}" alt="Gallery Image">`;
-    });
-  });
-}
+// 🔥 Run on page load
+updateVisitorCount();
+loadVideos();
 
-// 🎵 Multiple audio tracks
-function loadSongs() {
-  const songsDiv = document.getElementById("songs");
-  const songsCol = collection(db, "songs");
-  onSnapshot(songsCol, snapshot => {
-    songsDiv.innerHTML = "";
-    snapshot.forEach(doc => {
-      songsDiv.innerHTML += `<audio controls src="${doc.data().url}"></audio>`;
-    });
-  });
-}
-
-// 🔥 Initialize on page load
-window.onload = () => {
-  updateVisitorCount();
-  loadVideos();
-  loadImages();
-  loadSongs();
-};
 </script>
 
 </body>
