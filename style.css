@@ -1,31 +1,17 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: radial-gradient(circle, #0f172a, #000);
+  background: linear-gradient(120deg, #020617, #000);
   color: white;
   text-align: center;
 }
 
 header {
-  padding: 70px;
-  animation: fade 2s ease;
+  padding: 60px 20px;
 }
 
-input, button {
-  padding: 12px;
-  margin: 8px;
-  border-radius: 8px;
-  border: none;
-  font-size: 16px;
-}
-
-button {
-  background: #38bdf8;
-  cursor: pointer;
-}
-
-.hidden {
-  display: none;
+section {
+  padding: 40px 20px;
 }
 
 .videos iframe {
@@ -45,7 +31,31 @@ audio {
   margin: 10px;
 }
 
-@keyframes fade {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+.hidden {
+  display: none;
+}
+
+/* Admin UI */
+#adminBtn {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  opacity: 0.4;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+#adminBtn:hover {
+  opacity: 1;
+}
+
+.adminBox {
+  position: fixed;
+  bottom: 65px;
+  right: 15px;
+  background: #0f172a;
+  padding: 15px;
+  border-radius: 12px;
 }
