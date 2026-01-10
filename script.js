@@ -28,13 +28,15 @@ let songs = JSON.parse(localStorage.getItem("songs") || "[]");
 
 function render() {
   document.getElementById("videos").innerHTML =
-    videos.map(v => `<iframe src="https://www.youtube.com/embed/${v}" allowfullscreen></iframe>`).join("");
+    videos.map(v => `<iframe class="fade" src="https://www.youtube.com/embed/${v}" allowfullscreen></iframe>`).join("");
 
   document.getElementById("gallery").innerHTML =
-    images.map(i => `<img src="${i}">`).join("");
+    images.map(i => `<img class="fade" src="${i}">`).join("");
 
   document.getElementById("songs").innerHTML =
-    songs.map(s => `<audio controls src="${s}"></audio>`).join("");
+    songs.map(s => `<audio class="fade" controls src="${s}"></audio>`).join("");
+
+  observeFade();
 }
 
 render();
@@ -59,4 +61,19 @@ function addSong() {
   localStorage.setItem("songs", JSON.stringify(songs));
   songInput.value = "";
   render();
+}
+
+// 👁️ Subtle scroll reveal (Wikipedia-style)
+function observeFade() {
+  const items = document.querySelectorAll(".fade");
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add("show");
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  items.forEach(i => observer.observe(i));
 }
