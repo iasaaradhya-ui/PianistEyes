@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Aaradhya | Piano</title>
+  <title>Aaradhya Piano</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -10,22 +10,40 @@
 
 <header>
   <h1>Aaradhya 🎹</h1>
-  <p id="visitorCount"></p>
+  <button onclick="toggleDark()" class="toggle">🌙</button>
 </header>
 
-<section>
-  <h2>🎥 Video Gallery</h2>
+<nav>
+  <button onclick="showTab('home')">Home</button>
+  <button onclick="showTab('support')">Support</button>
+  <button onclick="showTab('contact')">Contact</button>
+  <button onclick="showTab('help')">Help</button>
+</nav>
+
+<section id="home" class="tab">
+  <h2>🎥 Videos</h2>
   <div id="videos" class="videos"></div>
-</section>
 
-<section>
-  <h2>📸 Image Gallery</h2>
+  <h2>📸 Gallery</h2>
   <div id="gallery" class="gallery"></div>
+
+  <h2>🎵 Recordings</h2>
+  <div id="songs"></div>
 </section>
 
-<section>
-  <h2>🎵 Piano Recordings</h2>
-  <div id="songs"></div>
+<section id="support" class="tab hidden">
+  <h2>Support</h2>
+  <p>If you like my piano work, share and support 🎹</p>
+</section>
+
+<section id="contact" class="tab hidden">
+  <h2>Contact</h2>
+  <p>Email: example@email.com</p>
+</section>
+
+<section id="help" class="tab hidden">
+  <h2>Help</h2>
+  <p>Use Admin panel to manage content.</p>
 </section>
 
 <!-- 🔐 ADMIN -->
@@ -33,13 +51,15 @@
 
 <div id="adminLogin" class="adminBox hidden">
   <input id="adminPass" type="password" placeholder="Admin password">
+  <label><input type="checkbox" onclick="togglePass()"> Show password</label>
   <button onclick="adminLogin()">Enter</button>
 </div>
 
 <div id="adminPanel" class="adminBox hidden">
   <h3>Admin Panel 🎹</h3>
+  <p id="adminVisits"></p>
 
-  <input id="videoInput" placeholder="YouTube video ID">
+  <input id="videoInput" placeholder="YouTube Video ID">
   <button onclick="addVideo()">Add Video</button>
 
   <input id="imageInput" placeholder="Image URL">
