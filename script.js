@@ -1,79 +1,102 @@
-// 📊 Visitor Counter
+// 🌙 Dark mode
+function toggleDark() {
+  document.body.classList.toggle("dark");
+}
+
+// 📑 Tabs
+function showTab(id) {
+  document.querySelectorAll(".tab").forEach(t => t.classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
+}
+
+// 📊 Visitor counter (ADMIN ONLY)
 let visits = localStorage.getItem("visits");
 visits = visits ? Number(visits) + 1 : 1;
 localStorage.setItem("visits", visits);
-document.getElementById("visitorCount").innerText = "Visitors: " + visits;
 
-// 🔐 Admin Login
+// 🔐 Admin
 const ADMIN_PASSWORD = "pianoAdmin123";
 
 function openAdmin() {
   document.getElementById("adminLogin").classList.toggle("hidden");
 }
 
-function adminLogin() {
-  const pass = document.getElementById("adminPass").value;
-  if (pass === ADMIN_PASSWORD) {
-    document.getElementById("adminLogin").classList.add("hidden");
-    document.getElementById("adminPanel").classList.remove("hidden");
-  } else {
-    alert("Wrong password");
-  }
+function togglePass() {
+  adminPass.type = adminPass.type === "password" ? "text" : "password";
 }
 
-// 💾 Load saved content
+function adminLogin() {
+  if (adminPass.value === ADMIN_PASSWORD) {
+    adminLoginBox();
+  } else alert("Wrong password");
+}
+
+function adminLoginBox() {
+  document.getElementById("adminLogin").classList.add("hidden");
+  document.getElementById("adminPanel").classList.remove("hidden");
+  document.getElementById("adminVisits").innerText =
+    "Total visits: " + visits;
+}
+
+// 💾 Content
 let videos = JSON.parse(localStorage.getItem("videos") || "[]");
 let images = JSON.parse(localStorage.getItem("images") || "[]");
 let songs = JSON.parse(localStorage.getItem("songs") || "[]");
 
 function render() {
-  document.getElementById("videos").innerHTML =
-    videos.map(v => `<iframe class="fade" src="https://www.youtube.com/embed/${v}" allowfullscreen></iframe>`).join("");
+  videosBox().innerHTML = videos.map(v =>
+    `<iframe class="fade" src="https://www.youtube.com/embed/${v}"></iframe>`
+  ).join("");
 
-  document.getElementById("gallery").innerHTML =
-    images.map(i => `<img class="fade" src="${i}">`).join("");
+  galleryBox().innerHTML = images.map(i =>
+    `<img class="fade" src="${i}">`
+  ).join("");
 
-  document.getElementById("songs").innerHTML =
-    songs.map(s => `<audio class="fade" controls src="${s}"></audio>`).join("");
+  songsBox().innerHTML = songs.map(s =>
+    `<audio class="fade" controls src="${s}"></audio>`
+  ).join("");
 
-  observeFade();
+  observe();
 }
+
+const videosBox = () => document.getElementById("videos");
+const galleryBox = () => document.getElementById("gallery");
+const songsBox = () => document.getElementById("songs");
 
 render();
 
-// ➕ Add content
 function addVideo() {
   videos.push(videoInput.value);
-  localStorage.setItem("videos", JSON.stringify(videos));
-  videoInput.value = "";
-  render();
+  save();
 }
 
 function addImage() {
   images.push(imageInput.value);
-  localStorage.setItem("images", JSON.stringify(images));
-  imageInput.value = "";
-  render();
+  save();
 }
 
 function addSong() {
   songs.push(songInput.value);
+  save();
+}
+
+function save() {
+  localStorage.setItem("videos", JSON.stringify(videos));
+  localStorage.setItem("images", JSON.stringify(images));
   localStorage.setItem("songs", JSON.stringify(songs));
-  songInput.value = "";
   render();
 }
 
-// 👁️ Subtle scroll reveal (Wikipedia-style)
-function observeFade() {
-  const items = document.querySelectorAll(".fade");
-  const observer = new IntersectionObserver(entries => {
+// ✨ Subtle animation
+function observe() {
+  const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.classList.add("show");
-        observer.unobserve(e.target);
+        obs.unobserve(e.target);
       }
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0.1 });
 
-  items.forEach(i => observer.observe(i));
+  document.querySelectorAll(".fade").forEach(el => obs.observe(el));
 }
