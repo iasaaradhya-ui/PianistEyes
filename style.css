@@ -1,44 +1,48 @@
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+  font-family: system-ui, sans-serif;
   background: #f8f9fa;
   color: #202122;
-  text-align: center;
+  transition: background 0.3s, color 0.3s;
+}
+
+.dark {
+  background: #0f172a;
+  color: #e5e7eb;
 }
 
 header {
-  padding: 60px 20px;
+  padding: 40px;
+  text-align: center;
   border-bottom: 1px solid #a2a9b1;
-  background: white;
+}
+
+.toggle {
+  margin-top: 10px;
+}
+
+nav {
+  text-align: center;
+  padding: 10px;
+}
+
+nav button {
+  margin: 5px;
 }
 
 section {
-  padding: 40px 20px;
   max-width: 900px;
   margin: auto;
+  padding: 30px;
 }
 
-/* Content blocks */
 .videos iframe,
 .gallery img,
 audio {
-  margin: 12px;
+  margin: 10px;
   border-radius: 6px;
 }
 
-/* ---- Wikipedia-like animation ---- */
-.fade {
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.fade.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Admin UI */
 .hidden {
   display: none;
 }
@@ -48,16 +52,10 @@ audio {
   bottom: 16px;
   right: 16px;
   opacity: 0.3;
-  background: #202122;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
 #adminBtn:hover {
-  opacity: 0.9;
+  opacity: 1;
 }
 
 .adminBox {
@@ -65,15 +63,22 @@ audio {
   bottom: 60px;
   right: 16px;
   background: white;
-  color: #202122;
   padding: 14px;
-  border-radius: 6px;
-  border: 1px solid #a2a9b1;
   width: 260px;
+  border-radius: 6px;
 }
 
-.adminBox input {
-  width: 100%;
-  margin: 6px 0;
-  padding: 6px;
+.dark .adminBox {
+  background: #020617;
+}
+
+.fade {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: 0.6s;
+}
+
+.fade.show {
+  opacity: 1;
+  transform: translateY(0);
 }
