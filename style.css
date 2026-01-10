@@ -58,4 +58,11 @@ audio {
   background: #0f172a;
   padding: 15px;
   border-radius: 12px;
+  width: 260px;
+}
+
+.adminBox input {
+  width: 100%;
+  margin: 6px 0;
+  padding: 6px;
 }
