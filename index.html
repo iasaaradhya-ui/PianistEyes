@@ -15,25 +15,17 @@
 
 <section>
   <h2>🎥 Video Gallery</h2>
-  <div class="videos">
-    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-    <iframe src="https://www.youtube.com/embed/9bZkp7q19f0" allowfullscreen></iframe>
-  </div>
+  <div id="videos" class="videos"></div>
 </section>
 
 <section>
   <h2>📸 Image Gallery</h2>
-  <div class="gallery">
-    <img src="https://picsum.photos/300/200?1">
-    <img src="https://picsum.photos/300/200?2">
-    <img src="https://picsum.photos/300/200?3">
-  </div>
+  <div id="gallery" class="gallery"></div>
 </section>
 
 <section>
   <h2>🎵 Piano Recordings</h2>
-  <audio controls src="song1.mp3"></audio>
-  <audio controls src="song2.mp3"></audio>
+  <div id="songs"></div>
 </section>
 
 <!-- 🔐 ADMIN -->
@@ -45,8 +37,16 @@
 </div>
 
 <div id="adminPanel" class="adminBox hidden">
-  <h2>Admin Panel 🎹</h2>
-  <p>You are logged in.</p>
+  <h3>Admin Panel 🎹</h3>
+
+  <input id="videoInput" placeholder="YouTube video ID">
+  <button onclick="addVideo()">Add Video</button>
+
+  <input id="imageInput" placeholder="Image URL">
+  <button onclick="addImage()">Add Image</button>
+
+  <input id="songInput" placeholder="MP3 URL">
+  <button onclick="addSong()">Add Song</button>
 </div>
 
 <script src="script.js"></script>
